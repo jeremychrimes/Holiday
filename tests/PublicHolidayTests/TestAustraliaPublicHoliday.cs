@@ -153,6 +153,28 @@ namespace PublicHolidayTests
         }
 
         [DataTestMethod]
+        [DataRow(1, 1, "New Years")]
+        [DataRow(1, 26, "Jan 26 - Australia Day")]
+        [DataRow(3, 11, "Labour Day")]
+        [DataRow(3, 29, "Good Friday")]
+        [DataRow(3, 30, "Easter Saturday")]
+        [DataRow(4, 1, "Easter Sunday")]
+        [DataRow(4, 2, "Easter Monday")]
+        [DataRow(4, 25, "Anzac Day")]
+        [DataRow(6, 10, "King's Birthday")]
+        [DataRow(9, 27, "AFL Grand Final Day")]
+        [DataRow(11, 5, "Melbourne Cup Day")]
+        [DataRow(12, 25, "Christmas Day")]
+        [DataRow(12, 26, "Boxing Day")]
+        public void TestVictoria2024(int month, int day, string name)
+        {
+            var holiday = new DateTime(2024, month, day);
+            var holidayCalendar = new AustraliaPublicHoliday() { State = AustraliaPublicHoliday.States.VIC };
+            var actual = holidayCalendar.IsPublicHoliday(holiday);
+            Assert.IsTrue(actual, $"{holiday:D} is not a holiday - should be {name}");
+        }
+
+        [DataTestMethod]
         [DataRow(1, 2, "new year (sunday, so monday is holiday)")]
         [DataRow(1, 26, "australia")]
         [DataRow(3, 6, "labour day")]
